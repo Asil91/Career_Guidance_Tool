@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Career Guidance Tool</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body {
+      height:100%;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:#f0fdf4; /* soft green background */
+      color:#111;
+    }
+
+    .wrap {
+      max-width:920px;
+      margin:28px auto;
+      padding:22px;
+      background:#ffffff;
+      border-radius:12px;
+      box-shadow:0 8px 24px rgba(22,163,74,0.15);
+      border:1px solid #bbf7d0;
+    }
+
+    header { margin-bottom:18px; }
+    h1 { font-size:22px; margin-bottom:6px; color:#14532d; }
+    p.lead { color:#166534; font-size:14px; margin-bottom:12px; }
+
+    form { display:grid; gap:16px; }
+    fieldset {
+      border:1px solid #bbf7d0;
+      border-radius:8px;
+      padding:14px;
+      background:#f9fefb;
+    }
+    legend { font-weight:600; padding:0 6px; color:#15803d; }
+
+    .grid { display:grid; gap:8px; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
+
+    label.checkbox {
+      display:flex; align-items:center; gap:10px;
+      background:#f0fdf4;
+      padding:8px;
+      border-radius:8px;
+      border:1px solid #bbf7d0;
+      cursor:pointer;
+      user-select:none;
+      font-size:14px;
+      transition: background 0.2s, border 0.2s;
+    }
+    label.checkbox:hover {
+      background:#dcfce7;
+      border-color:#22c55e;
+    }
+    label.checkbox input { width:18px; height:18px; accent-color:#16a34a; }
+
+    .controls { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:6px; }
+    button {
+      background:#16a34a;
+      color:#fff;
+      border:0;
+      padding:10px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+      transition: background 0.2s;
+    }
+    button:hover { background:#15803d; }
+    button.secondary {
+      background:#f0fdf4;
+      color:#14532d;
+      border:1px solid #bbf7d0;
+    }
+    button.secondary:hover { background:#dcfce7; }
+    button:active { transform:translateY(1px); }
+
+    .results {
+      margin-top:12px;
+      padding:14px;
+      background:#f0fdf4;
+      border-radius:10px;
+      border:1px solid #bbf7d0;
+    }
+
+    .career {
+      padding:10px;
+      border-radius:8px;
+      margin-bottom:10px;
+      background:#ffffff;
+      border:1px solid #bbf7d0;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .career h3 { margin-bottom:6px; font-size:16px; color:#14532d; }
+    .career p { margin:0; color:#166534; font-size:13px; }
+
+    footer.small { margin-top:14px; color:#15803d; font-size:13px; text-align:center; }
+
+    @media (max-width:520px) {
+      .grid { grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header>
+      <h1>Career Guidance Tool</h1>
+      <p class="lead">Answer a few quick questions about your interests and school subjects. The tool will suggest careers that fit your preferences.</p>
+    </header>
+
+    <form id="quiz" onsubmit="return false;">
+      <fieldset>
+        <legend>1) Pick the activities you enjoy</legend>
+        <div class="grid" aria-label="Interests">
+          <label class="checkbox"><input type="checkbox" name="interest" value="creativity"> Creativity / Design</label>
+          <label class="checkbox"><input type="checkbox" name="interest" value="problem"> Problem solving</label>
+          <label class="checkbox"><input type="checkbox" name="interest" value="helping"> Helping people</label>
+          <label class="checkbox"><input type="checkbox" name="interest" value="computers"> Computers / Programming</label>
+          <label class="checkbox"><input type="checkbox" name="interest" value="business"> Business / Finance</label>
+          <label class="checkbox"><input type="checkbox" name="interest" value="science"> Science / Research</label>
+          <label class="checkbox"><input type="checkbox" name="interest" value="art"> Art / Visual</label>
+          <label class="checkbox"><input type="checkbox" name="interest" value="math"> Math / Analytics</label>
+          <label class="checkbox"><input type="checkbox" name="interest" value="writing"> Writing / Communication</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>2) Choose the subjects you like (school)</legend>
+        <div class="grid" aria-label="Subjects">
+          <label class="checkbox"><input type="checkbox" name="subject" value="math"> Mathematics</label>
+          <label class="checkbox"><input type="checkbox" name="subject" value="physics"> Physics</label>
+          <label class="checkbox"><input type="checkbox" name="subject" value="biology"> Biology</label>
+          <label class="checkbox"><input type="checkbox" name="subject" value="computer"> Computer Science</label>
+          <label class="checkbox"><input type="checkbox" name="subject" value="economics"> Economics / Business Studies</label>
+          <label class="checkbox"><input type="checkbox" name="subject" value="english"> English / Languages</label>
+          <label class="checkbox"><input type="checkbox" name="subject" value="art"> Art / Design</label>
+          <label class="checkbox"><input type="checkbox" name="subject" value="chemistry"> Chemistry</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3) Work environment you prefer</legend>
+        <div class="grid">
+          <label class="checkbox"><input type="radio" name="workstyle" value="team"> Team & collaborative</label>
+          <label class="checkbox"><input type="radio" name="workstyle" value="solo"> Independent / focused</label>
+          <label class="checkbox"><input type="radio" name="workstyle" value="office"> Office / corporate</label>
+          <label class="checkbox"><input type="radio" name="workstyle" value="field"> Field / hands-on</label>
+          <label class="checkbox"><input type="radio" name="workstyle" value="remote"> Remote / flexible</label>
+        </div>
+      </fieldset>
+
+      <div class="controls">
+        <button id="recommendBtn" type="button">Get career suggestions</button>
+        <button id="clearBtn" class="secondary" type="button">Clear answers</button>
+      </div>
+    </form>
+
+    <section id="output" class="results" aria-live="polite" style="display:none;">
+      <h2 style="font-size:15px; margin-bottom:10px; color:#14532d;">Top career matches</h2>
+      <div id="careersList"></div>
+      <div id="debug" style="margin-top:8px; font-size:13px; color:#15803d;"></div>
+    </section>
+
+    <footer class="small">
+      Career Guidance Tool © 2025
+    </footer>
+  </div>
+
+  <script>
+    const careers = [
+      { id:'software_dev', title:'Software Developer', tags:['computers','problem','math'], subjects:['computer','math'], desc:'Builds apps, websites, and software — good for problem-solvers who like coding.' },
+      { id:'data_scientist', title:'Data Scientist / Analyst', tags:['math','computers','problem','science'], subjects:['math','computer','physics'], desc:'Uses statistics and code to find insights in data.' },
+      { id:'doctor', title:'Medical Doctor / Healthcare', tags:['helping','science'], subjects:['biology','chemistry'], desc:'Helps people directly; strong science and people skills needed.' },
+      { id:'engineer', title:'Engineer (Civil/Mechanical/Electrical)', tags:['problem','math','physics'], subjects:['math','physics'], desc:'Designs and builds real-world systems and structures.'},
+      { id:'teacher', title:'Teacher / Educator', tags:['helping','writing','english'], subjects:['english','math','biology','computer'], desc:'Explains ideas and supports students — great for people-focused learners.'},
+      { id:'graphic_designer', title:'Graphic Designer / Visual Designer', tags:['creativity','art'], subjects:['art','english'], desc:'Creates visual content such as logos, posters, and websites.'},
+      { id:'writer', title:'Writer / Content Creator', tags:['writing','english','creativity'], subjects:['english'], desc:'Writes articles, stories, or marketing content.'},
+      { id:'business_analyst', title:'Business / Finance', tags:['business','math'], subjects:['economics','math'], desc:'Works with business strategy, numbers, and planning.'},
+      { id:'architect', title:'Architect', tags:['creativity','math','problem'], subjects:['math','art','physics'], desc:'Designs buildings combining art and engineering.'},
+      { id:'accountant', title:'Accountant', tags:['math','business'], subjects:['math','economics'], desc:'Manages finances, bookkeeping and tax work.'}
+    ];
+
+    function getCheckedValues(name){
+      return Array.from(document.querySelectorAll([name="${name}"]:checked)).map(i=>i.value);
+    }
+
+    function recommend(){
+      const interests = getCheckedValues('interest');
+      const subjects = getCheckedValues('subject');
+      const workstyle = (document.querySelector('[name="workstyle"]:checked') || {}).value || '';
+
+      const scored = careers.map(c => {
+        let score = 0;
+        c.tags.forEach(tag => { if (interests.includes(tag)) score += 3; });
+        c.subjects.forEach(s => { if (subjects.includes(s)) score += 4; });
+        if (workstyle === 'team' && ['teacher','business_analyst','doctor','software_dev'].some(k => c.id.includes(k.split('_')[0]))) score += 1;
+        if (workstyle === 'solo' && ['writer','graphic_designer','accountant','data_scientist'].some(k => c.id.includes(k.split('_')[0]))) score += 1;
+        return { ...c, score };
+      });
+
+      scored.sort((a,b) => b.score - a.score);
+
+      const output = document.getElementById('output');
+      const list = document.getElementById('careersList');
+      const debug = document.getElementById('debug');
+      list.innerHTML = '';
+      if (!interests.length && !subjects.length && !workstyle) {
+        output.style.display = 'block';
+        list.innerHTML = '<p style="color:#14532d">Please pick some interests or subjects to get meaningful suggestions.</p>';
+        debug.textContent = '';
+        return;
+      }
+
+      const top = scored.filter(s=>s.score>0).slice(0,5);
+      if (top.length === 0) {
+        output.style.display = 'block';
+        list.innerHTML = '<p style="color:#14532d">No strong matches found. Try selecting more subjects or different interests.</p>';
+      } else {
+        output.style.display = 'block';
+        top.forEach(item => {
+          const el = document.createElement('div');
+          el.className = 'career';
+          el.innerHTML = `
+            <div>
+              <h3>${item.title}</h3>
+              <p>${item.desc}</p>
+              <p style="margin-top:6px; font-size:12px; color:#166534;"><strong>Matched tags:</strong> ${item.tags.join(', ')} • <strong>Relevant subjects:</strong> ${item.subjects.join(', ')}</p>
+            </div>
+            <div style="min-width:58px; text-align:right;">
+              <div style="font-weight:700; font-size:18px; color:#15803d;">${item.score}</div>
+              <div style="font-size:12px; color:#166534;">score</div>
+            </div>
+          `;
+          list.appendChild(el);
+        });
+      }
+
+      debug.textContent = 'Tip: select more items for clearer matches.';
+      try { localStorage.setItem('career_guidance_last', JSON.stringify({ interests, subjects, workstyle, top: top.map(t=>t.title) })); } catch(e){}
+    }
+
+    function clearAnswers(){
+      document.querySelectorAll('input').forEach(i => i.checked = false);
+      document.getElementById('output').style.display = 'none';
+      try { localStorage.removeItem('career_guidance_last'); } catch(e){}
+    }
+
+    document.getElementById('recommendBtn').addEventListener('click', recommend);
+    document.getElementById('clearBtn').addEventListener('click', clearAnswers);
+
+    (function loadSaved(){
+      try {
+        const raw = localStorage.getItem('career_guidance_last');
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (!saved) return;
+        saved.interests?.forEach(v => { const el = document.querySelector([name="interest"][value="${v}"]); if (el) el.checked = true; });
+        saved.subjects?.forEach(v => { const el = document.querySelector([name="subject"][value="${v}"]); if (el) el.checked = true; });
+        if (saved.workstyle) { const el = document.querySelector([name="workstyle"][value="${saved.workstyle}"]); if (el) el.checked = true; }
+        if ((saved.interests?.length || saved.subjects?.length || saved.workstyle)) recommend();
+      } catch(e){}
+    })();
+  </script>
+</body>
+</html>
